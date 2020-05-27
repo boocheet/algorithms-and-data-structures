@@ -9,15 +9,15 @@
 
  //linked list stores a piece of data called val
  //it references to the next node - next
- class NOde{
+ class Node{
    constructor(val){
-     this.val - val;
-     this.next - null;
+     this.val = val;
+     this.next = null;
     }
   }
 
-  class singlyLinkedList{
-    constructor(){
+  class SinglyLinkedList{
+    constructor(val){
       this.length = 0; 
       this.head = null;
       this.tail = null;
@@ -26,7 +26,7 @@
     push(val){
       //create a new node using the val passed to the function
       let newNode = new Node(val)
-      // if there is no head property on the list set the head and tail tobe the newly created node
+      // if there is no head property on the list set the head and tail to be the newly created node
     if(!this.head){
       this.head = newNode; 
       this.tail = this.head; 
@@ -82,22 +82,22 @@
        if (this.length === 0){
         this.tail = null; 
       }
-      //return the valu of the node removed
+      //return the value of the node removed
       return currentHead; 
     }
 
     // add a node from beginning of linked list
     unshift(val){
       //create a new node using the value passed to thr function 
-      let newNode = new NOde(val);
-      //if there is no head proprty on the list, set the head and tail to be the newly created node
+      let newNode = newNode(val);
+      //if there is no head property on the list, set the head and tail to be the newly created node
       if(!this.head){
         this.head = newNode; 
         this.tail = this.head; 
         //else set the newly created node's next property to be the current head property on the list
       } else {
           newNode.next = this.head; 
-          //set the head property on the list to be theat newly created node
+          //set the head property on the list to be at the newly created node
           this.head = newNode
       }
       // increment the length of the list by 1 
@@ -107,21 +107,21 @@
     }
 
     //retrieve a node by it's position in the linked list
-    get(val){
+    get(index){
       // if the index < zero or index >= length of list return null 
       if (index < 0 || index >= this.length) return null; 
       //loop through the list until you reach the index and return the node at the specific index
       let counter = 0; 
-      let currrent = this.head; 
+      let current = this.head; 
       while(counter !== index) {
-        current = currrent.next;
+        current = current.next;
         counter++;
       }
       return current
     }
 
     //change the value of a node based on it's positon in the linked list
-    set(index, vals){
+    set(index, val){
       // use the get function to find the specific node
       let foundNode = this.get(index)
       //if the node is found, set the value of that node to be the val passed to the function and return true;
@@ -164,5 +164,29 @@
       return true;
     }
 
+    remove(index){
+      // if the index is less than zero or greater than the this.length, return null
+      if(index < 0 || index >= this.length) return undefined; 
+      // if the index is the same as the length -1 pop 
+      if (index === this.length - 1) return this.pop(); 
+      // if the index is 0, shift 
+      if (index === 0) return this.shift(); 
+      // otherwise use the get method to access the node at the index -1 
+      let prev = this.get(index - 1)
+      let del = this.get(index)
+      // set the next property on that node to be the next of the next node
+       prev.next = del.next
+      // decrement the length
+      this.length--
+      // return the val of the node removed
+      return del
+    }
+
   }
-  let first = new
+  let list = new SinglyLinkedList()
+
+list.push(100)
+list.push(201)
+list.push(250)
+list.push(350)
+console.log(list)
