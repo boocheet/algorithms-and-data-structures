@@ -1,4 +1,8 @@
 /** 
+ * singly linked list are an alternative to arrays when insertion and deletion are frequently 
+ * required at the beginning
+ * 
+ * 
  * ]inked list 
  * linked list is a collection of nodes
  * linked list do not have indices
@@ -182,11 +186,47 @@
       return del
     }
 
+    print(){
+      let arr = []
+      let current = this.head
+      while(current){
+        arr.push(current.val)
+        current = current.next
+      }
+      console.log(arr)
+    }
+
+    reverse(){
+      // create a variable called node and initialize it to the head
+      let node = this.head 
+      // swap the head and tail 
+      this.head = this.tail
+      this.tail = node
+      // Create a variable called next set it to null
+      let next = null; 
+      // Create a variable called prev set it to null
+      let prev = null;
+      // loop through the list
+      for(let i = 0; i < this.length; i++){
+        //set next to be the next property on whatever node is
+        next = node.next; 
+        //set the next property on the node to be whatever prev is 
+        node.next = prev; 
+        // set prev to be the value of the node variable
+        prev = node; 
+        // set the node variable to be the value of the next variable 
+        node = next; 
+      }
+      return this;
+    }
   }
+
   let list = new SinglyLinkedList()
 
 list.push(100)
 list.push(201)
 list.push(250)
 list.push(350)
-console.log(list)
+console.log(list.print())
+list.reverse()
+console.log('reversed', list.print())
