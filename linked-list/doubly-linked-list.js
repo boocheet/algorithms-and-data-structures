@@ -59,10 +59,58 @@
         // return the value remove
         return currentTail;
      }
+     shift(){
+        //  if length is 0 return undefined 
+        if (this.length === 0) return undefined;
+        // store the current head in a var
+        let oldHead = this.head
+        // if length is one 
+        if(this.length === 1){
+            // set the head to null 
+            this.head = null; 
+            // set the tail to null 
+            this.tail = null 
+        } else {
+            // update the head to be the next of the old head 
+            this.head = oldHead.next
+            // set the head's prev to null 
+            this.head.prev = null; 
+            // set the old head's next to null 
+            oldHead.next = null; 
+        }
+        // decrement the length
+        this.length--;
+        // return the old head 
+        return oldHead;
+     }
+     unshift(val){
+         // create a new node with the val passed fto the function 
+         let newHead = new Node(val)
+         // if length is 0
+         if (this.length === 0){
+             // set the head to tbe the new node
+             this.head = newHead;
+             // set the tail to be the new node 
+             this.tail = newHead; 
+         } else {
+            // store the head node 
+            this.head.prev = newHead; 
+            // set the next property on the new node to be the prev head
+            newHead.next = this.head; 
+            // update the head to be the new node
+            this.head = newHead
+         }
+        // increment the length
+        this.length++
+        // return the list
+        return this;
+     }
  }
 
 list = new DoublyLinkedList()
 list.push(99)
 list.push(100)
 list.push('last item')
+list.shift()
+list.unshift(99)
  console.log(list)
