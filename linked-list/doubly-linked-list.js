@@ -38,7 +38,27 @@
         // return the doubly linked list
         return this;
      }
-
+     pop(){
+        //  if there is no head return undefined 
+        if (!this.head) return undefined; 
+        // store the current tail in the variable to return later
+        let currentTail = this.tail 
+        // if the length is 1, set the head and tail and prev tail to be null 
+        if(this.length === 1){
+            this.head = null; 
+            this.tail = null; 
+            currentTail.prev = null;
+        }else {
+            // update the tail to be the prev node
+            this.tail = currentTail.prev
+            // set the new tails next to null 
+            this.tail.next = null; 
+        }
+        // decrement the length 
+        this.length--;
+        // return the value remove
+        return currentTail;
+     }
  }
 
 list = new DoublyLinkedList()
